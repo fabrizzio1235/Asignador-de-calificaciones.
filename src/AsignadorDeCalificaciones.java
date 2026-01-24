@@ -39,55 +39,50 @@ public class AsignadorDeCalificaciones {
         int cal = -1;
         String matricula;
         do {
-            System.out.print("Ingrese matricula de alumno: ");
-            matricula = sc.nextLine();
-            System.out.print("Asigne su calificacion: ");
-            if (!sc.hasNextInt()) {
-                System.out.println("Error: Debe ingresar un número entero.");
+            System.out.print("1-.Asignar otra calificación\n2-.Generar CSV\n3-.Salir\nIngerese un número: ");
+            if (sc.hasNextInt()) {
+                op = sc.nextInt();
                 sc.nextLine();
-                continue;
             }
 
-            cal = sc.nextInt();
-            sc.nextLine();
-
-            if (cal < 0 || cal > 100) {
-                System.out.println("Calificacion invalida, válido del 1 al 100");
-            } else {
-                boolean encontrado = false;
-                for (Alumno alumno : listaAlumnos) {
-                    if (alumno.getMatricula().equalsIgnoreCase(matricula)) {
-                        System.out.print(alumno);
-                        alumno.setCalificacion(cal);
-                        System.out.println(" --> " + alumno);
-                        encontrado = true;
-                        break;
-                    }
-                }
-                if (!encontrado) {
-                    System.out.println(matricula + " no encontrado");
-                }
-                System.out.println("Ingrese 1 para asignar otra calificación, 0 Para generar CSV");
-                if (sc.hasNextInt()) {
-                    op = sc.nextInt();
+            if (op == 2) {
+                generarCsv();
+            } else if(op == 1) {
+                System.out.print("Ingrese matricula de alumno: ");
+                matricula = sc.nextLine();
+                System.out.print("Asigne su calificacion: ");
+                if (!sc.hasNextInt()) {
+                    System.out.println("Error: Debe ingresar un número entero.");
                     sc.nextLine();
+                    continue;
                 }
 
-                if (op == 0) {
-                    ArrayList<String> restantes = todosCalificados();
-                    if (restantes.isEmpty()) {
-                        System.out.println("Todos los alumnos calificados, generando csv...");
-                    } else {
-                        System.out.println("Error: Alumnos sin calificacion restantes");
-                        for (String mat : restantes) {
-                            System.out.print(mat + ",");
+                cal = sc.nextInt();
+                sc.nextLine();
+
+                if (cal < 0 || cal > 100) {
+                    System.out.println("Calificacion invalida, válido del 1 al 100");
+                } else {
+                    boolean encontrado = false;
+                    for (Alumno alumno : listaAlumnos) {
+                        if (alumno.getMatricula().equalsIgnoreCase(matricula)) {
+                            System.out.print(alumno);
+                            alumno.setCalificacion(cal);
+                            System.out.println(" --> " + alumno);
+                            encontrado = true;
+                            break;
                         }
-                        op = 1;
-                        System.out.println("    Regresando...");
+                    }
+                    if (!encontrado) {
+                        System.out.println(matricula + " no encontrado");
                     }
                 }
+            } else if (op == 3) {
+                System.out.println("Regresando...");
+            } else {
+                System.out.println("Ingrese una opción válida");
             }
-        } while (op != 0);
+        } while (op != 2 && op != 3);
     }
 
     public ArrayList todosCalificados() {
@@ -100,22 +95,39 @@ public class AsignadorDeCalificaciones {
         return sinCalificar;
     }
 
+
     public void generarCsv() {
-        listaAlumnos.sort(Comparator.comparingInt(Alumno::getCalificacion));
-        System.out.println("Escriba el nombre que desea para el archivo de salida:");
-        String nombreArchivo = sc.nextLine() + ".csv";
+        if(validarCSV()) {
+            listaAlumnos.sort(Comparator.comparingInt(Alumno::getCalificacion));
+            System.out.println("Escriba el nombre que desea para el archivo de salida:");
+            String nombreArchivo = sc.nextLine() + ".csv";
 
-        try (BufferedWriter wr = new BufferedWriter(new FileWriter(nombreArchivo))) {
-            wr.write("Matricula,Primer Apellido,Segundo Apellido,Nombres,Calificacion");
-            wr.newLine();
-            for (Alumno alumnillo : listaAlumnos) {
-                wr.write(alumnillo.toString());
+            try (BufferedWriter wr = new BufferedWriter(new FileWriter(nombreArchivo))) {
+                wr.write("Matricula,Primer Apellido,Segundo Apellido,Nombres,Calificacion");
                 wr.newLine();
-            }
+                for (Alumno alumnillo : listaAlumnos) {
+                    wr.write(alumnillo.toString());
+                    wr.newLine();
+                }
 
-            System.out.println("Archivo CSV creado con exito en: " + new File(nombreArchivo).getAbsolutePath());
-        } catch (IOException e) {
-            System.err.println("Error: " + e.getMessage());
+                System.out.println("Archivo CSV creado con exito en: " + new File(nombreArchivo).getAbsolutePath());
+            } catch (IOException e) {
+                System.err.println("Error: " + e.getMessage());
+            }
+        }
+    }
+    public boolean validarCSV() {
+        ArrayList<String> restantes = todosCalificados();
+        if(restantes.isEmpty()) {
+            System.out.println("Todos los alumnos calificados, generando csv...");
+            return true;
+        } else {
+            System.out.print("Error: Alumnos sin calificacion restantes ->");
+            for (String mat : restantes) {
+                System.out.print(mat + ",");
+            }
+            System.out.println();
+            return false;
         }
     }
 }

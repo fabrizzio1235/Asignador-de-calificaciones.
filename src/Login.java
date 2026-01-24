@@ -80,7 +80,7 @@ public class Login {
             }
 
             if (!usuarioEncontrado) {
-                System.out.println("Usuario inexistente. Desea crear una cuenta nueva? Si: 0, No: 1, Salir: 2");
+                System.out.println("Usuario inexistente. Desea crear una cuenta nueva?\nSi: 0 \nNo: 1\nSalir: 2");
                 int opcionUsuario = sc.nextInt();
                 sc.nextLine();
 
@@ -105,7 +105,7 @@ public class Login {
                         return 0;
                     }
                 }
-                System.out.println("Contraseña invalida. Salir? Si: 0, No: 1");
+                System.out.println("Contraseña invalida. Salir?\nSi: 0\nNo: 1");
                 int opcionUsuario = sc.nextInt();
                 sc.nextLine();
 

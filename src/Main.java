@@ -6,21 +6,36 @@ public class Main {
     public static void main(String[] args) throws NoSuchAlgorithmException {
         Login lg = new Login();
         AsignadorDeCalificaciones ad = new AsignadorDeCalificaciones();
+        GeneradorReportePDF reportePDF = new GeneradorReportePDF();
         Scanner sc = new Scanner(System.in);
 
-        int op = lg.login(); int op1 = 1;
+        int op = 1, op1 = 4;
+        do {
+            if(op == 0) {
+                if(op1 == 4) {if(!ad.leerCalificaciones()){continue;}}
+                System.out.print("1-.Asignar calificaciones\n2-.Generar CSV\n3-.Generar Reporte\n4-.Usar otro CSV\n5-.Cerrar sesión\n6-.Salir de la Aplicación\nEscriba una opción: ");
 
-        if (op == 0) {
-            while(!ad.leerCalificaciones()) {
-                System.out.println("Salir: 0, Intentar nuevamente: Cualquier num"); //Por mejorar
-                op1 = sc.nextInt();
-                if(op1==0) {
-                    System.out.println("Saliendo de la aplicación...");
-                    return;
+                if (sc.hasNextInt()) {op1 = sc.nextInt();}
+                else {op1 = 7;sc.nextLine();}
+
+                switch (op1) {
+                    case 1 -> ad.asignarCalificacion();
+                    case 2 -> ad.generarCsv();
+                    case 3 -> reportePDF.generarPDF();
+                    case 4 -> {}
+                    case 5 -> {
+                        System.out.println("Saliendo de la sesión...");
+                        op = 1;
+                    }
+                    case 6 -> {}
+                    default -> System.out.println("Insertar opción válida 1 al 6");
                 }
+            } else {
+                op = lg.login();
             }
-            ad.asignarCalificacion();
-            ad.generarCsv();
-        }
+        } while (op1 != 6);
+
+        System.out.println("Saliendo de la Aplicación...");
     }
 }
+
