@@ -5,7 +5,7 @@ import java.util.Scanner;
 import java.util.Comparator;
 
 public class AsignadorDeCalificaciones {
-    List<Alumno> listaAlumnos = new ArrayList<>();
+    private ArrayList<Alumno> listaAlumnos = new ArrayList<>();
     Scanner sc = new Scanner(System.in);
 
     public boolean leerCalificaciones() {
@@ -129,5 +129,9 @@ public class AsignadorDeCalificaciones {
             System.out.println();
             return false;
         }
+    }
+
+    public ArrayList<Alumno> getListaAlumnos() {
+        return listaAlumnos;
     }
 }

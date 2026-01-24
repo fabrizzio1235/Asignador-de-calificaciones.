@@ -1,3 +1,4 @@
+import java.io.File;
 import java.security.NoSuchAlgorithmException;
 import java.util.Scanner;
 
@@ -21,7 +22,11 @@ public class Main {
                 switch (op1) {
                     case 1 -> ad.asignarCalificacion();
                     case 2 -> ad.generarCsv();
-                    case 3 -> reportePDF.generarPDF();
+                    case 3 -> {
+                        System.out.println("Generando Reporte en PDF...");
+                        reportePDF.generarPDF(ad.getListaAlumnos());
+                        System.out.println("Reporte PDF creado con exito en: " + new File("Reporte_De_Calificaciones.pdf").getAbsolutePath());
+                    }
                     case 4 -> {}
                     case 5 -> {
                         System.out.println("Saliendo de la sesión...");
