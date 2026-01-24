@@ -11,8 +11,8 @@
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
     <dependencies>
         <dependency>
             <groupId>com.github.librepdf</groupId>
@@ -20,4 +20,18 @@
             <version>1.3.30</version>
         </dependency>
     </dependencies>
+
+    <build>
+        <sourceDirectory>src</sourceDirectory> <!--Modificar cuando organicemos mejor las clases-->
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <mainClass>Main</mainClass>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
