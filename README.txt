@@ -28,7 +28,7 @@ y habilitar la interacción del usuario en este. Hubieron unos cuantos errores d
 
 Modificación T3:
 
-En la tercera parte de la unidad, se mejoró la interfaz de interacción con el usuario, por terminal. Ahora es mucho más flexible, intuitiva y práctica. Por lo que se modificaron e insertaros
+En la tercera parte de la unidad, se mejoró la interfaz de interacción con el usuario, por terminal. Ahora es mucho más flexible, intuitiva y práctica. Por lo que se modificaron e insertaron
 nuevos métodos de clases ya existentes para lograrlo. Y se implementó la funcionalidad de generar reportes en PDF. Se integró el framework Maven para automatizar la gestión de dependencias, Es un gestor de librerías. En lugar de que tú busques, descargues y pegues archivos .jar manualmente, maven lee tu pom.xml, va a internet, descarga OpenPDF por ti y lo conecta a tu proyecto automáticamente. Si desea correrlo por la terminal dirijase a la raíz del project, una vez ahi ejecute los siguientes dos comandos 'mvn clean install' (compila y empaqueta todo el proyecto) para ejecutar es con 'mvn exec:java'. Al igual que es posible correrlo por medio de una IDE como intelliJ por ejemplo
 
 -La mejora de interfaz no fue complicado pero si tardado, porque se tenia que adaptar cierta parte del código, la mayor parte del tiempo se lo llevó el planteamiento de implementación, adaptación de código anterior, implementar mas validaciones y  unos cuantos errores causados por la lógica del progrmador - 1 hora
