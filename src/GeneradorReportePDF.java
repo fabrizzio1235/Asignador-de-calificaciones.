@@ -18,7 +18,7 @@ public class GeneradorReportePDF {
             tit.setAlignment(Element.ALIGN_CENTER);
             //sub (materia)
             Font fontsub = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 14, Color.black);
-            Paragraph sub = new Paragraph("Diseño de software", fontsub);
+            Paragraph sub = new Paragraph("Diseño de Software", fontsub);
             sub.setAlignment(Element.ALIGN_CENTER);
 
             doc.add(tit);
