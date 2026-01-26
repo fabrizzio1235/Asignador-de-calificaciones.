@@ -37,8 +37,11 @@ public class Main {
                 }
             } else {
                 op = lg.login();
+                if(op == 1){
+                    op1 = 6;
+                }
             }
-        } while (op1 != 6);
+        } while (op1 != 6 );
 
         System.out.println("Saliendo de la Aplicación...");
     }

@@ -5,8 +5,9 @@ import java.util.Scanner;
 import java.util.Comparator;
 
 public class AsignadorDeCalificaciones {
-    private ArrayList<Alumno> listaAlumnos = new ArrayList<>();
+    private ArrayList<Alumno> listaAlumnos;
     Scanner sc = new Scanner(System.in);
+
 
     public boolean leerCalificaciones() {
         System.out.println("Escriba el nombre del archivo de las calificaciones:");
@@ -15,8 +16,9 @@ public class AsignadorDeCalificaciones {
             String linea;
             br.readLine();
             linea = br.readLine();
-
+            listaAlumnos = new ArrayList<>();
             while (linea != null) {
+
                 String[] renglon = linea.split(",");
 
                 if (renglon.length == 4) {

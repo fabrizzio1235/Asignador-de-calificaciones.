@@ -35,7 +35,7 @@ public class GeneradorReportePDF {
             for (int i = 0; i < alumnitos.size(); i++) {
                 tabla.addCell(alumnitos.get(i).getMatricula());
                 tabla.addCell(alumnitos.get(i).getAppellido1()+" "+alumnitos.get(i).getAppellido2()+" "+alumnitos.get(i).getNombres());
-                if(alumnitos.get(i).getCalificacion()>0){
+                if(alumnitos.get(i).getCalificacion()>=0){
                     tabla.addCell(String.valueOf(alumnitos.get(i).getCalificacion()));
                 } else {
                     tabla.addCell("S/C");
