@@ -1,3 +1,4 @@
+
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -12,7 +13,7 @@ public class Login {
     Scanner sc = new Scanner(System.in);
 
     public void leerUsuarios() {
-        try (BufferedReader br = new BufferedReader(new FileReader("src/users.csv"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("src/main/resources/users.csv"))) {
             String linea = br.readLine();
 
             while (linea != null) {
@@ -54,7 +55,7 @@ public class Login {
         Usuario nuevoUsuario = new Usuario(nuevoNickname, nuevaContraseña);
         listaUsuarios.add(nuevoUsuario);
 
-        try (BufferedWriter wr = new BufferedWriter(new FileWriter("src/users.csv", true))) {
+        try (BufferedWriter wr = new BufferedWriter(new FileWriter("src/main/resources/users.csv", true))) {
             wr.newLine();
             wr.write(nuevoNickname+','+nuevaContraseña);
         } catch (IOException e) {
@@ -80,7 +81,7 @@ public class Login {
             }
 
             if (!usuarioEncontrado) {
-                System.out.println("Usuario inexistente. Desea crear una cuenta nueva?\nSi: 0 \nNo: 1\nSalir: 2");
+                System.out.println("main.java.Usuario inexistente. Desea crear una cuenta nueva?\nSi: 0 \nNo: 1\nSalir: 2");
                 int opcionUsuario = sc.nextInt();
                 sc.nextLine();
 

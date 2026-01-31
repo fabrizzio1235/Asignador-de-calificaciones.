@@ -10,7 +10,7 @@ public class GeneradorReportePDF {
     public void generarPDF(ArrayList<Alumno> alumnitos) {
         Document doc = new Document();
         try {
-            PdfWriter.getInstance(doc, new FileOutputStream("Reporte_De_Calificaciones.pdf"));
+            PdfWriter.getInstance(doc, new FileOutputStream("output/Reporte_De_Calificaciones.pdf"));
             doc.open();
             //tit
             Font fontTit = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 20, Color.black);

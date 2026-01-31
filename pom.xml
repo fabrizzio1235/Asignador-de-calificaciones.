@@ -22,14 +22,13 @@
     </dependencies>
 
     <build>
-        <sourceDirectory>src</sourceDirectory> <!--Modificar cuando organicemos mejor las clases-->
         <plugins>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>3.1.0</version>
                 <configuration>
-                    <mainClass>Main</mainClass>
+                    <mainClass>main.java.Main</mainClass>
                 </configuration>
             </plugin>
         </plugins>
