@@ -1,3 +1,4 @@
+package uady.ucan.proyecto;
 
 public class Usuario {
     private String nickname;

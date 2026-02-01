@@ -1,3 +1,4 @@
+package uady.ucan.proyecto;
 
 public class Alumno {
     private final String matricula;
@@ -27,6 +28,10 @@ public class Alumno {
 
     public String getNombres() {
         return nombres;
+    }
+
+    public String getNombreCompleto() {
+        return apellido1 + " "+apellido2 +  " "+ nombres;
     }
 
     void setCalificacion(int calificacion) {

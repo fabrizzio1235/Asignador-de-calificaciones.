@@ -1,6 +1,11 @@
-Login.class
-Main.class
-GeneradorReportePDF.class
-AsignadorDeCalificaciones.class
-Alumno.class
-Usuario.class
+uady/ucan/proyecto/RecibirCSVUsuario.class
+uady/ucan/proyecto/AsignadorDeCalificaciones.class
+uady/ucan/proyecto/Alumno.class
+uady/ucan/proyecto/ControladorVentanas.class
+uady/ucan/proyecto/Usuario.class
+uady/ucan/proyecto/CambioDeMenu.class
+uady/ucan/proyecto/GeneradorDeCSV.class
+module-info.class
+uady/ucan/proyecto/GeneradorReportePDF.class
+uady/ucan/proyecto/Main.class
+uady/ucan/proyecto/Login.class

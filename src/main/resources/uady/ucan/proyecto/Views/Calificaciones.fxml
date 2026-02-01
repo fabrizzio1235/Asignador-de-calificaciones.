@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<AnchorPane minHeight="500" minWidth="400" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uady.ucan.proyecto.AsignadorDeCalificaciones">
+    <children>
+        <TableView fx:id="tablaAlumnos" AnchorPane.topAnchor="50.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
+            <columns>
+                <TableColumn fx:id="matricula" prefWidth="120.0" text="Matrícula" />
+                <TableColumn fx:id="alumno" prefWidth="150.0" text="Alumno" />
+                <TableColumn fx:id="calificacion" prefWidth="100.0" text="Calificación"/>
+            </columns>
+        </TableView>
+    </children>
+</AnchorPane>

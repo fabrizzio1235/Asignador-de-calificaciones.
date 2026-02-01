@@ -1,16 +1,23 @@
+package uady.ucan.proyecto;
 
 import com.lowagie.text.*;
+import com.lowagie.text.Font;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
-import java.awt.Color;
+import javafx.scene.control.Alert;
+
+import java.awt.*;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 
-public class GeneradorReportePDF {
-    public void generarPDF(ArrayList<Alumno> alumnitos) {
+public class GeneradorReportePDF extends CambioDeMenu{
+    public void generarPdf(String pdfNombre) {
+        if(pdfNombre == null || pdfNombre.trim().isEmpty()){pdfNombre ="Reporte_Calificaciones";}
         Document doc = new Document();
+        ArrayList<Alumno> alumnitos = getAlumnos();
         try {
-            PdfWriter.getInstance(doc, new FileOutputStream("output/Reporte_De_Calificaciones.pdf"));
+            PdfWriter.getInstance(doc, new FileOutputStream("output/"+pdfNombre+".pdf"));
             doc.open();
             //tit
             Font fontTit = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 20, Color.black);
@@ -42,6 +49,7 @@ public class GeneradorReportePDF {
                 }
             }
             doc.add(tabla);
+            setAlert(Alert.AlertType.CONFIRMATION, "Reporte PDF creado con exito en: " + new File("output/Reporte_De_Calificaciones.pdf").getAbsolutePath());
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
