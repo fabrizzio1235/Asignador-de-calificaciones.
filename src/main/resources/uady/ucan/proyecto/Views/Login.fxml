@@ -9,7 +9,7 @@
 <?import java.net.URL?>
 <VBox alignment="CENTER" spacing="15.0" minHeight="500" minWidth="400">
     <stylesheets>
-        <URL value="@Styles/login.css" />
+        <URL value="@Styles/styles.css" />
     </stylesheets>
     <children>
         <Label text = "Inicio de sesión"></Label>

@@ -8,6 +8,9 @@ import static uady.ucan.proyecto.ControladorVentanas.*;
 
 public class Main extends Application {
     ControladorVentanas cv = new ControladorVentanas();
+
+
+
     @Override
     public void start(Stage stage) {
         cv.abrirVentana(MENU_VIEW_FXML,"Inicio de Sesión"); //

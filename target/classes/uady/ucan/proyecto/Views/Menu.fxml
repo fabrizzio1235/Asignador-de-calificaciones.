@@ -7,7 +7,9 @@
 <?import java.net.URL?>
 <?import javafx.scene.control.Separator?>
 
-<BorderPane prefHeight="320" prefWidth="400" style="-fx-padding: 10"  xmlns:fx="http://javafx.com/fxml/1" fx:controller="uady.ucan.proyecto.CambioDeMenu">
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.control.Label?>
+<BorderPane prefHeight="320" prefWidth="400" style="-fx-padding: 10" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uady.ucan.proyecto.CambioDeMenu">
     <stylesheets>
         <URL value="@Styles/menu.css"/>
     </stylesheets>
@@ -16,12 +18,18 @@
         <VBox spacing="10">
             <BorderPane>
                 <left>
-                    <Button text="Generar" onAction="#generar"/>
+                    <StackPane styleClass="sombra-inferior-button">
+                        <Button text="Generar" onAction="#generar"/>
+                    </StackPane>
                 </left>
                 <right>
                     <HBox spacing="10">
-                        <Button text="Cerrar sesión" onAction="#cerrarSesion"/>
-                        <Button text="Salir" onAction="#salir"/>
+                        <StackPane styleClass="sombra-inferior-button">
+                            <Button text="Cerrar sesión" onAction="#cerrarSesion"/>
+                        </StackPane>
+                        <StackPane styleClass="sombra-inferior-button">
+                            <Button text="Salir" onAction="#salir"/>
+                        </StackPane>
                     </HBox>
                 </right>
             </BorderPane>
@@ -31,8 +39,13 @@
 
     <center>
         <VBox alignment="TOP_CENTER" spacing="20" style="-fx-padding: 60 0 0 0;">
-            <Button text="Elegir archivo CSV" onAction="#recibirCSV"  prefWidth="250"></Button>
-            <Button text="Asignar Calificaciones" prefWidth="250" onAction="#asignarCalificacion"/>
+            <StackPane styleClass="sombra-inferior-button">
+                <Button text="Elegir archivo CSV" onAction="#recibirCSV"  prefWidth="250"></Button>
+            </StackPane>
+            <StackPane styleClass="sombra-inferior-button">
+                <Button text="Asignar Calificaciones" prefWidth="250" onAction="#asignarCalificacion"/>
+            </StackPane>
+
         </VBox>
     </center>
 </BorderPane>

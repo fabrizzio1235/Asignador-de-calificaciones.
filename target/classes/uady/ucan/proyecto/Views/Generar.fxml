@@ -14,13 +14,17 @@
         <TextField fx:id="csvNombre"></TextField> <Label text=".csv" styleClass="label-terminacion"/>
     </HBox>
     <HBox alignment="CENTER" spacing="5">
-        <Button text="Confirmar" onAction="#generarCSV"/>
+        <StackPane styleClass="sombra-inferior-button">
+            <Button text="Confirmar" onAction="#generarCSV"/>
+        </StackPane>
     </HBox>
     <HBox alignment="CENTER" spacing="5">
         <Label text="Nombre del PDF:"/>
         <TextField fx:id="pdfNombre"></TextField> <Label text=".pdf" styleClass="label-terminacion"/>
     </HBox>
     <HBox alignment="CENTER" spacing="5">
-        <Button text="Confirmar" onAction="#generarPDF"/>
+        <StackPane styleClass="sombra-inferior-button">
+            <Button text="Confirmar" onAction="#generarPDF"/>
+        </StackPane>
     </HBox>
 </VBox>

@@ -4,7 +4,12 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TableColumn?>
+<?import java.net.URL?>
+
 <AnchorPane minHeight="500" minWidth="400" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uady.ucan.proyecto.AsignadorDeCalificaciones">
+    <stylesheets>
+        <URL value="@Styles/styles.css"/>
+    </stylesheets>
     <children>
         <TableView fx:id="tablaAlumnos" AnchorPane.topAnchor="50.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
             <columns>
