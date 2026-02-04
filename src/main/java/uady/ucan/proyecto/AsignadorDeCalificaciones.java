@@ -20,10 +20,7 @@ public class AsignadorDeCalificaciones extends CambioDeMenu implements Initializ
     @FXML private TableColumn<Alumno, String> alumno;
     @FXML private TableColumn<Alumno, String> calificacion;
 
-
-
     private ObservableList<Alumno> alumnos = null;
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

@@ -46,5 +46,4 @@ public class Alumno {
     public String toString() {
         return getMatricula() + ',' + getAppellido1() + ',' + getAppellido2() + ',' + getNombres() + ",Diseño de Software," + getCalificacion();
     }
-
 }

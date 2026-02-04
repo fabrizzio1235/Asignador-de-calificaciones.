@@ -7,6 +7,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,6 +17,8 @@ public class RecibirCSVUsuario extends CambioDeMenu {
     private TextField csvUsuario;
     @FXML
     private Label mostrarCsvUsuario;
+    @FXML
+    private Label rutaUsuario;
 
     private ArrayList<Alumno> listaAlumnos;
 
@@ -40,16 +43,16 @@ public class RecibirCSVUsuario extends CambioDeMenu {
 
         } catch (IOException e) {
             setAlumnos(null);
-            mostrarCsvUsuario.setText("CSV no seleccionado");
+            mostrarCsvUsuario.setText("No seleccionado");
             mostrarCsvUsuario.setTextFill(Color.RED);
             setAlert(Alert.AlertType.WARNING, "Error al buscar archivo: "+ e.getMessage());
             return;
 
         }
         setAlumnos(listaAlumnos);
-        System.out.println("Encontrado");
         mostrarCsvUsuario.setText(csvUsuario.getText());
         mostrarCsvUsuario.setTextFill(Color.GREEN);
+        rutaUsuario.setText(new File(archivoCalificaciones).getAbsolutePath());
     }
 
 

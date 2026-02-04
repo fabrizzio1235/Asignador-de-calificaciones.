@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class ControladorVentanas {
-
+    Stage st = new Stage();
     private static ArrayList <Alumno> alumnos = null;
 
     public static final String VIEWS_DIRECTORY = "/uady/ucan/proyecto/Views/";
@@ -19,29 +19,27 @@ public class ControladorVentanas {
     public static final String CALIFICACIONES_VIEW_FXML = VIEWS_DIRECTORY + "Calificaciones.fxml";
     public static final String CSV_USUARIO_VIEW_FXML = VIEWS_DIRECTORY + "CSVUsuario.fxml";
 
-
     static Alert defaultAlert;
     static ButtonType acceptButton = new ButtonType("Aceptar");
 
-
     public void abrirVentana(String fxmlFileName, String title) {
         try {
-            // Abrir una nueva ventana (core del sistema)
             FXMLLoader fxmlLoader = new FXMLLoader(ControladorVentanas.class.getResource(fxmlFileName));
             Scene scene = new Scene(fxmlLoader.load());
-            Stage stage = new Stage();
-            stage.setTitle(title);
-            stage.setScene(scene);
+
+            st.setTitle(title);
+            st.setScene(scene);
 
 
-            stage.show();
-            stage.centerOnScreen();
+            st.sizeToScene();
+            st.centerOnScreen();
+
+            st.show();
 
         } catch (IOException | NullPointerException e) {
-            setAlert(Alert.AlertType.WARNING, "Error al cargar la vista "+ e.getMessage());
+            setAlert(Alert.AlertType.WARNING, "Error al cargar la vista " + e.getMessage());
         }
     }
-
 
     static public void setAlert(Alert.AlertType alertType,String argument){
         defaultAlert = new Alert(alertType);
@@ -59,5 +57,4 @@ public class ControladorVentanas {
     public void setAlumnos(ArrayList<Alumno> alumnos) {
         this.alumnos = alumnos;
     }
-
 }

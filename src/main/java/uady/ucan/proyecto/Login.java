@@ -1,5 +1,14 @@
 package uady.ucan.proyecto;
 
+import javafx.fxml.FXML;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+import javafx.stage.Window;
+
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -9,9 +18,14 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.lang.StringBuilder;
 
-public class Login {
-    ArrayList<Usuario> listaUsuarios = new ArrayList<>();
-    Scanner sc = new Scanner(System.in);
+import static uady.ucan.proyecto.ControladorVentanas.setAlert;
+
+public class Login extends CambioDeMenu {
+    @FXML private TextField usuarioEntrada;
+    @FXML private PasswordField contraseñaEntrada;
+    @FXML private Button botonLogin;
+
+    private ArrayList<Usuario> listaUsuarios = new ArrayList<>();
 
     public void leerUsuarios() {
         try (BufferedReader br = new BufferedReader(new FileReader("src/main/resources/users.csv"))) {
@@ -46,77 +60,31 @@ public class Login {
         return bytesToHex(hashEncriptado);
     }
 
-    public void crearUsuario() throws NoSuchAlgorithmException {
-        System.out.println("Ingresa tu nuevo nombre de usuario:");
-        String nuevoNickname = sc.nextLine();
-        System.out.println("Ingresa tu nueva contraseña:");
-        String nuevaContraseña = sc.nextLine();
-
-        nuevaContraseña = encriptarContraseña(nuevaContraseña);
-        Usuario nuevoUsuario = new Usuario(nuevoNickname, nuevaContraseña);
-        listaUsuarios.add(nuevoUsuario);
-
-        try (BufferedWriter wr = new BufferedWriter(new FileWriter("src/main/resources/users.csv", true))) {
-            wr.newLine();
-            wr.write(nuevoNickname+','+nuevaContraseña);
-        } catch (IOException e) {
-            System.err.println("Error: " + e.getMessage());
-        }
-    }
-
-    public int login() throws NoSuchAlgorithmException { // 0: Entrar a la app, 1: Salir
+    public void inicioSesion() throws NoSuchAlgorithmException { // 0: Entrar a la app, 1: Salir
         leerUsuarios();
-
-        while (true) {
-            System.out.println("Bienvenido al Editor de Calificaciones. Ingrese usuario y contraseña:");
-
-            System.out.println("Usuario: ");
-            String usuarioEntrada = sc.nextLine(); // El nuestro es admin
-
-            boolean usuarioEncontrado = false;
-            for (Usuario u: listaUsuarios) {
-                if (u.getNickname().equals(usuarioEntrada)) {
-                    usuarioEncontrado = true;
-                    break;
+        boolean usuarioEncontrado = false;
+        for (Usuario u : listaUsuarios) {
+            if (u.getNickname().equals(usuarioEntrada.getText())) {
+                usuarioEncontrado = true;
+                break;
+            }
+        }
+        if (!usuarioEncontrado) {
+            setAlert(Alert.AlertType.WARNING, "Usuario incorrecto.");
+            return;
+        } else {
+            boolean aux = false;
+            for (Usuario u : listaUsuarios) {
+                if (u.getNickname().equals(usuarioEntrada.getText()) && u.getPassword().equals(encriptarContraseña(contraseñaEntrada.getText()))) {
+                    menu();
+                    botonLogin.getScene().getWindow().hide();
+                    aux = true;
                 }
             }
-
-            if (!usuarioEncontrado) {
-                System.out.println("main.java.Usuario inexistente. Desea crear una cuenta nueva?\nSi: 0 \nNo: 1\nSalir: 2");
-                int opcionUsuario = sc.nextInt();
-                sc.nextLine();
-
-                if (opcionUsuario == 0) {
-                    crearUsuario();
-                    continue;
-                }
-
-                if (opcionUsuario == 2) {
-                    return 1;
-                }
-
+            if (!aux) {
+                setAlert(Alert.AlertType.WARNING, "Contraseña incorrecta.");
+                return;
             }
-
-            else {
-                System.out.println("Contraseña: ");
-                String contraseñaEntrada = sc.nextLine(); // El nuestro es "prueba", convertido a hash con SHA-256
-
-                for (Usuario u: listaUsuarios) {
-                    if (u.getNickname().equals(usuarioEntrada) && u.getPassword().equals(encriptarContraseña(contraseñaEntrada))) {
-                        System.out.println("Entrando a la aplicacion...");
-                        return 0;
-                    }
-                }
-                System.out.println("Contraseña invalida. Salir?\nSi: 0\nNo: 1");
-                int opcionUsuario = sc.nextInt();
-                sc.nextLine();
-
-                if (opcionUsuario == 0) {
-                    return 1;
-                }
-            }
-
-
         }
     }
 }

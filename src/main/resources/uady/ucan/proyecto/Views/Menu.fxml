@@ -28,7 +28,7 @@
                             <Button text="Cerrar sesión" onAction="#cerrarSesion"/>
                         </StackPane>
                         <StackPane styleClass="sombra-inferior-button">
-                            <Button text="Salir" onAction="#salir"/>
+                            <Button fx:id="botonSalir" text="Salir" onAction="#salir"/>
                         </StackPane>
                     </HBox>
                 </right>

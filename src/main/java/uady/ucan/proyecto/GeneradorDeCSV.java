@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 
-public class GeneradorDeCSV  extends CambioDeMenu{
+public class GeneradorDeCSV  extends CambioDeMenu {
 
     public void generarCsv(String csvNombre) {
         if(csvNombre == null || csvNombre.trim().isEmpty()){csvNombre ="Calificaciones";}

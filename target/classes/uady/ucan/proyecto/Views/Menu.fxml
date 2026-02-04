@@ -11,7 +11,7 @@
 <?import javafx.scene.control.Label?>
 <BorderPane prefHeight="320" prefWidth="400" style="-fx-padding: 10" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uady.ucan.proyecto.CambioDeMenu">
     <stylesheets>
-        <URL value="@Styles/menu.css"/>
+        <URL value="@Styles/styles.css"/>
     </stylesheets>
 
     <top>
@@ -28,7 +28,7 @@
                             <Button text="Cerrar sesión" onAction="#cerrarSesion"/>
                         </StackPane>
                         <StackPane styleClass="sombra-inferior-button">
-                            <Button text="Salir" onAction="#salir"/>
+                            <Button fx:id="botonSalir" text="Salir" onAction="#salir"/>
                         </StackPane>
                     </HBox>
                 </right>

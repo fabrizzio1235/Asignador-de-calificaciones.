@@ -7,15 +7,25 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.PasswordField?>
 <?import java.net.URL?>
-<VBox alignment="CENTER" spacing="15.0" minHeight="500" minWidth="400">
+<VBox alignment="CENTER" prefHeight="300" prefWidth="400" style="-fx-padding: 10" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uady.ucan.proyecto.Login">
     <stylesheets>
-        <URL value="@Styles/login.css" />
+        <URL value="@Styles/styles.css" />
     </stylesheets>
+
     <children>
-        <Label text = "Inicio de sesión"></Label>
-        <TextField ></TextField>
-        <Label text = "Contraseña" ></Label>
-        <PasswordField  ></PasswordField>
-        <Button >INGRESAR</Button>
+        <Label text="Asignador de Calificaciones" style="line" />
+
+        <VBox spacing="10.0">
+            <Label text="Nombre de Usuario" style="line"/>
+            <TextField fx:id="usuarioEntrada" promptText="Mi usuario...:" />
+        </VBox>
+
+        <VBox spacing="10.0">
+            <Label text="Contraseña"/>
+            <PasswordField fx:id="contraseñaEntrada" promptText="Mi contraseña..." />
+        </VBox>
+
+        <Button fx:id="botonLogin" text="Entrar" onAction="#inicioSesion"
+                maxWidth="Infinity" />
     </children>
 </VBox>
