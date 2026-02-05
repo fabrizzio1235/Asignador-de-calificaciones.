@@ -8,6 +8,7 @@
 <?import javafx.scene.control.PasswordField?>
 <?import java.net.URL?>
 
+<?import javafx.scene.layout.StackPane?>
 <VBox alignment="CENTER" prefHeight="300" prefWidth="400"
       spacing="30.0" style="-fx-padding: 50;"
       xmlns:fx="http://javafx.com/fxml/1"
@@ -21,15 +22,15 @@
         <Label text="Asignador de Calificaciones"
                style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: white;" />
 
-        <VBox spacing="20.0" alignment="CENTER_LEFT" maxWidth="350">
+        <VBox spacing="20.0" alignment="CENTER" maxWidth="350">
 
-            <VBox spacing="5.0">
+            <VBox spacing="5.0" alignment="CENTER">
                 <Label text="Nombre de Usuario" style="-fx-text-fill: #cccccc;" />
                 <TextField fx:id="usuarioEntrada"
                            maxWidth="Infinity" prefHeight="40.0" styleClass="campo-texto" />
             </VBox>
 
-            <VBox spacing="5.0">
+            <VBox spacing="5.0" alignment="CENTER">
                 <Label text="Contraseña" style="-fx-text-fill: #cccccc;" />
                 <PasswordField fx:id="contraseñaEntrada"
                                maxWidth="Infinity" prefHeight="40.0" styleClass="campo-texto" />
@@ -37,8 +38,10 @@
 
         </VBox>
 
-        <Button fx:id="botonLogin" text="Entrar" onAction="#inicioSesion"
-                maxWidth="400" prefHeight="45.0"
-                style="-fx-font-size: 16px; -fx-cursor: hand;" />
+        <StackPane styleClass="sombra-inferior-button">
+            <Button fx:id="botonLogin" text="Entrar" onAction="#inicioSesion"
+                    maxWidth="400" prefHeight="45.0"
+                    style="-fx-font-size: 16px; -fx-cursor: hand;" />
+        </StackPane>
     </children>
 </VBox>
