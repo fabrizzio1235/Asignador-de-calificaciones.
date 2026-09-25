@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class ControladorVentanas {
-    Stage st = new Stage();
+
     private static ArrayList <Alumno> alumnos = null;
 
     public static final String VIEWS_DIRECTORY = "/uady/ucan/proyecto/Views/";
@@ -24,6 +24,7 @@ public class ControladorVentanas {
 
     public void abrirVentana(String fxmlFileName, String title) {
         try {
+            Stage st = new Stage();
             FXMLLoader fxmlLoader = new FXMLLoader(ControladorVentanas.class.getResource(fxmlFileName));
             Scene scene = new Scene(fxmlLoader.load());
 
