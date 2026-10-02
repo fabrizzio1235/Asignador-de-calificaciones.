@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import java.net.URL?>
+<VBox alignment="CENTER" prefWidth="330" prefHeight="180" spacing="20" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uady.ucan.proyecto.RecibirCSVUsuario">
+    <stylesheets>
+        <URL value="@Styles/styles.css"/>
+    </stylesheets>
+    <HBox alignment="CENTER" spacing="5">
+        <Label text="Nombre del CSV:"/>
+        <Label fx:id="mostrarCsvUsuario"  styleClass="label-terminacion" style="-fx-text-fill: red; -fx-font-size: 14px;"/>
+    </HBox>
+    <HBox alignment="CENTER" spacing="5">
+        <TextField  fx:id="csvUsuario"/>
+        <Label text=".csv" styleClass="label-terminacion" />
+        <StackPane styleClass="sombra-inferior-button">
+            <Button text="Confirmar" onAction="#buscarCsvUsuario"/>
+        </StackPane>
+    </HBox>
+    <HBox alignment="CENTER" spacing="5">
+        <Label text="Ruta:"/>
+        <Label fx:id="rutaUsuario"  styleClass="label-terminacion" style="-fx-text-fill: green; -fx-font-size: 14px;"/>
+    </HBox>
+</VBox>
