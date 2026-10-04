@@ -4,6 +4,7 @@ import com.lowagie.text.*;
 import com.lowagie.text.Font;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
+import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 
 import java.awt.*;
@@ -49,7 +50,7 @@ public class GeneradorReportePDF extends CambioDeMenu{
         }
         return tabla;
     }
-
+    @FXML
     public void generarPdf(String pdfNombre) {
         String nombreFinal = (pdfNombre == null || pdfNombre.trim().isEmpty()) ? "Reporte_Calificaciones" : pdfNombre;
         Document doc = new Document();

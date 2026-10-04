@@ -24,13 +24,13 @@ class GeneradorReportePDFTest {
     private static final String NOMBRE_REPORTE = "reporte_temporal_de_prueba";
     private Path rutaEsperada;
 
+    // Prepara dos alumnos de prueba (uno calificado, uno sin calificar) y
+    // asegura que exista la carpeta "output/" antes de cada prueba.
     @BeforeEach
     void prepararAlumnosYCarpetaSalida() throws IOException {
-        // El método escribe en "output/", nos aseguramos de que exista
         Files.createDirectories(Path.of("output"));
         rutaEsperada = Path.of("output/" + NOMBRE_REPORTE + ".pdf");
         Files.deleteIfExists(rutaEsperada);
-        //CASO DE PRUEBA DOS ALUMNOS (UNO SIN CALIFICAR)
         ArrayList<Alumno> alumnos = new ArrayList<>();
         Alumno a1 = new Alumno("A001", "Perez", "Lopez", "Juan");
         a1.setCalificacion(95);
@@ -41,20 +41,26 @@ class GeneradorReportePDFTest {
         new GeneradorReportePDF().setAlumnos(alumnos);
     }
 
+    // Borra el PDF generado y resetea la lista estática de alumnos después
+    // de cada prueba.
     @AfterEach
     void limpiar() throws IOException {
         Files.deleteIfExists(rutaEsperada);
-        new GeneradorReportePDF().setAlumnos(null); // "alumnos" es static, reseteamos
+        new GeneradorReportePDF().setAlumnos(null);
     }
-    //PRUEBA PARA REFACTORIZAR EL EXTRACT METHOD DE GeneradorReportePDF
 
+    /*
+    Prueba para el Extract Method
+    Objetivo: Confirmar que, tras dividir generarPdf() en crearTitulo(), crearSubtitulo()
+    y crearTabla(), el método completo sigue produciendo el PDF y notificando el éxito
+    exactamente igual que antes de extraer esos métodos.
+    Resultado esperado: el archivo PDF existe en disco y se dispara CONFIRMATION.
+    Datos: dos alumnos de prueba, nombre de archivo normal (NOMBRE_REPORTE).
+     */
     @Test
     void generarPdfCreaElArchivoYNotificaExitoConCONFIRMATION() {
         GeneradorReportePDF generador = new GeneradorReportePDF();
 
-        // Mientras este bloque esté activo, CUALQUIER llamada a un método
-        // estático de ControladorVentanas (como setAlert) no hace nada real,
-        // solo queda registrada para que la podamos verificar.
         try (MockedStatic<ControladorVentanas> alertaSimulada = mockStatic(ControladorVentanas.class)) {
 
             generador.generarPdf(NOMBRE_REPORTE);
@@ -65,11 +71,16 @@ class GeneradorReportePDFTest {
             );
         }
 
-        // Y comprobamos que el PDF de verdad se haya creado en disco
         assertTrue(Files.exists(rutaEsperada), "El PDF debería existir en " + rutaEsperada);
     }
-    //PRUEBA PARA REFACTORIZAR EL EXTRACT METHOD DE GeneradorReportePDF
 
+    /*
+    Técnica: Remove Assignments to Parameters
+    Objetivo: Verificar específicamente la reasignación directa del parámetro pasado para el método generarPDF()
+    por la variable nueva "nombreFinal", cuando el nombre llega vacío o en blanco.
+    Resultado esperado: se crea el archivo con el nombre por defecto "Reporte_Calificaciones.pdf".
+    Datos: dos alumnos de prueba, nombre de archivo " " (solo espacios).
+     */
     @Test
     void generarPdfUsaNombrePorDefectoCuandoElNombreEstaVacio() {
         Path rutaPorDefecto = Path.of("output/Reporte_Calificaciones.pdf");
@@ -94,16 +105,18 @@ class GeneradorReportePDFTest {
         }
     }
 
-    // =========================================================================================
-    // PRUEBA PARA CERRAR EL CASO 4 (Introduce Explaining Variable)
-    // El refactor extrae "alumnitos.get(i)" a una variable dentro del for que llena la tabla.
-    // Esta prueba abre el PDF ya generado y lee su texto real, para asegurarnos de que cada
-    // celda (matrícula, nombre completo, calificación o "S/C") siga quedando exactamente igual
-    // después de ese cambio.
-    // =========================================================================================
-
+    /*
+    Pruebas para el Introduce Explaining Variable + Extract Method
+    Objetivo: Esta prueba cubre DOS técnicas sobre el mismo método porque ambas tocan
+    exactamente el mismo bloque de código (el 'for' que llenaba la tabla):
+      - "alumnitos.get(i)" repetido 4 veces
+      - generarPDF() Hace muchas cosas
+    Resultado esperado: el texto extraído del PDF contiene la matrícula, el nombre
+    completo y la calificación (o "S/C") de cada alumno, y nunca el -1 interno.
+    Datos: dos alumnos de prueba (uno calificado con 95, uno sin calificar).
+     */
     @Test
-    void generarPdfEscribeLosDatosCorrectosEnLaTablaIncluyendoSC() throws IOException {
+    void generarPdfEscribeLosDatosCorrectosEnLaTablaIncluyendoLosSinCalificar() throws IOException {
         GeneradorReportePDF generador = new GeneradorReportePDF();
 
         try (MockedStatic<ControladorVentanas> alertaSimulada = mockStatic(ControladorVentanas.class)) {
@@ -130,11 +143,12 @@ class GeneradorReportePDFTest {
         assertFalse(textoPdf.contains("-1"), "Nunca debe filtrarse el -1 interno hacia el PDF");
     }
 
+    // Abre el PDF ya generado en disco y extrae su texto real, página por página,
+    // para poder comparar el contenido contra lo que se esperaba.
     private String extraerTextoDePdf(String rutaArchivo) throws IOException {
         PdfReader lector = new PdfReader(rutaArchivo);
         try {
-            // En esta versión de OpenPDF, PdfTextExtractor se instancia con el
-            // PdfReader (no es una clase 100% estática como en otras versiones/forks).
+
             PdfTextExtractor extractor = new PdfTextExtractor(lector);
             StringBuilder texto = new StringBuilder();
             for (int pagina = 1; pagina <= lector.getNumberOfPages(); pagina++) {

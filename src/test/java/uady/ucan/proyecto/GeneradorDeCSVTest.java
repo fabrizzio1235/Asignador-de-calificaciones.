@@ -22,6 +22,9 @@ class GeneradorDeCSVTest {
     private static final String NOMBRE_CSV_PRUEBA = "csv_temporal_de_prueba";
     private GeneradorDeCSV generador;
 
+    // Crea un GeneradorDeCSV limpio y asegura que exista la carpeta "output/"
+    // antes de cada prueba, para que ninguna prueba dependa del estado que
+    // haya dejado otra.
     @BeforeEach
     void limpiarEstadoCompartido() throws IOException {
         generador = new GeneradorDeCSV();
@@ -29,6 +32,9 @@ class GeneradorDeCSVTest {
         Files.createDirectories(Path.of("output"));
     }
 
+    // Borra los archivos CSV que la prueba haya generado y resetea la lista
+    // estática de alumnos, para que el sistema quede exactamente como estaba
+    // antes de correr la prueba.
     @AfterEach
     void limpiarArchivosGenerados() throws IOException {
         Files.deleteIfExists(Path.of("output/" + NOMBRE_CSV_PRUEBA + ".csv"));
@@ -36,10 +42,13 @@ class GeneradorDeCSVTest {
         generador.setAlumnos(null);
     }
 
-    // ==========================================
-    // PRUEBAS PARA generarCsv() (Remove Assignments to Parameters)
-    // ==========================================
-
+    /*
+    Prueba para aplicar Remove Assignments to Parameters
+    Objetivo: Generar un archivo csv con calificaciones de forma ascendente y con su nombre asignado por el usuario
+    Resultado esperado: que el primer alumno ingresado en el csv sea el alumno Bajo, y también que el nombre generado sea el correcto
+    Datos:    -Dos alumnos de manera correcta (uno con calif. alta y otro baja)
+              -Se coloca el nombre del archivo NOMBRE_CSV_PRUEBA
+     */
     @Test
     void generarCsvOrdenaPorCalificacionAscendenteYEscribeElArchivo() throws IOException {
         ArrayList<Alumno> alumnos = new ArrayList<>();
@@ -64,6 +73,12 @@ class GeneradorDeCSVTest {
         assertTrue(lineas.get(1).startsWith("A002"), "A002 (60) debe ser primero");
     }
 
+    /*
+    Prueba para aplicar Remove Assignments to Parameters
+    Objetivo: Confirmar que si quedan alumnos sin calificar, NO se escribe ningún archivo, y avisa que faltan calificaciones.
+    Resultado esperado: no se crea ningún archivo csv_temporal_de_prueba.csv, y se dispara WARNING.
+    Datos: dos alumnos, uno calificado y otro sin calificar (-1).
+     */
     @Test
     void generarCsvNoEscribeNadaSiQuedanAlumnosSinCalificar() {
         ArrayList<Alumno> alumnos = new ArrayList<>();
@@ -85,6 +100,12 @@ class GeneradorDeCSVTest {
         assertFalse(Files.exists(Path.of("output/" + NOMBRE_CSV_PRUEBA + ".csv")));
     }
 
+    /*
+    Prueba para aplicar Remove Assignments to Parameters
+    Objetivo: Verificar específicamente cuando csvNombre es vacío ("csvNombre = 'Calificaciones'")
+    Resultado esperado: se crea el archivo con el nombre por defecto "Calificaciones.csv".
+    Datos: un alumno calificado, nombre de archivo " " (solo espacios).
+     */
     @Test
     void generarCsvUsaNombrePorDefectoCuandoElNombreEstaVacio() {
         ArrayList<Alumno> alumnos = new ArrayList<>();

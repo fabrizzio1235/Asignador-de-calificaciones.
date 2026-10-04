@@ -1,4 +1,5 @@
 package uady.ucan.proyecto;
+import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 
 import java.io.BufferedWriter;
@@ -9,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 
 public class GeneradorDeCSV  extends CambioDeMenu {
-
+    @FXML
     public void generarCsv(String csvNombre) {
         //Remove Assignments to Parameters - Nuevo
         String nombreFinal = (csvNombre == null || csvNombre.trim().isEmpty()) ? "Calificaciones" : csvNombre;

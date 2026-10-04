@@ -71,6 +71,7 @@ public class Login extends CambioDeMenu {
     }
 
     //Substitute Algorithm - Nuevo
+    @FXML
     public void inicioSesion() throws NoSuchAlgorithmException { // 0: Entrar a la app, 1: Salir
         leerUsuarios();
         Usuario usuario = buscarUsuario(usuarioEntrada.getText());
