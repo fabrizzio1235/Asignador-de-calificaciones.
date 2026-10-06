@@ -35,7 +35,7 @@ class LoginTest {
     }
 
     /*
-    Prueba para Substitute Algorithm + Extract Method
+    Prueba para Substitute Algorithm + Extract Method || + Extract Class
     Objetivo: Confirmar que el sistema responda correctamente para el caso de ingresar un usuario incorrecto.
     Resultado esperado: se dispara WARNING "Usuario incorrecto." y nunca se llama a menu().
     Datos: usuarioEntrada = "usuario_inexistente", listaUsuarios vacía (leerUsuarios apagado).
@@ -71,7 +71,7 @@ class LoginTest {
     }
 
     /*
-    Prueba para Substitute Algorithm + Extract Method
+    Prueba para Substitute Algorithm + Extract Method || + Extract Class
     Objetivo: Confirmar un usuario que SÍ existe pero con contraseña incorrecta se sigue rechazando igual
     Resultado esperado: se dispara WARNING "Contraseña incorrecta." y nunca se llama a menu().
     Datos: usuarioEntrada = "admin" (existe en listaUsuarios inyectada), contraseña incorrecta.
@@ -108,7 +108,7 @@ class LoginTest {
     }
 
     /*
-    Prueba para Substitute Algorithm + Extract Method
+    Prueba para Substitute Algorithm + Extract Method || + Extract Class
     Objetivo: Confirmar que acepta al usuario correcto (usuario existe/contraseña es correcta)
     Resultado esperado: se llama a menu()
     Datos: usuarioEntrada = "admin", contraseñaEntrada = "1234" (coincide con el hash inyectado).
@@ -164,13 +164,11 @@ class LoginTest {
         login.leerUsuarios();
 
         // Extraemos la lista privada para contar cuántos usuarios guardó en memoria
-        @SuppressWarnings("unchecked")
         ArrayList<Usuario> listaUsuarios = (ArrayList<Usuario>) obtenerCampoPrivado(login, "listaUsuarios");
 
         assertEquals(lineasEnElArchivo, listaUsuarios.size());
     }
 
-    // MÉTODOS UTILITARIOS (apoyo)
 
     // Cuenta cuántas líneas tiene un archivo de texto, leyéndolo de verdad desde disco.
     private int contarLineas(String ruta) throws IOException {
