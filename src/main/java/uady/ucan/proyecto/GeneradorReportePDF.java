@@ -12,7 +12,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 
-public class GeneradorReportePDF extends CambioDeMenu{
+import static uady.ucan.proyecto.Alerta.setAlert;
+
+public class GeneradorReportePDF extends CambioDeMenu {
 
     //Extract Method - Nuevo
     //Usa alumnoActual en vez de alumnitos.get(i) repetido
@@ -54,7 +56,6 @@ public class GeneradorReportePDF extends CambioDeMenu{
     public void generarPdf(String pdfNombre) {
         String nombreFinal = (pdfNombre == null || pdfNombre.trim().isEmpty()) ? "Reporte_Calificaciones" : pdfNombre;
         Document doc = new Document();
-        ArrayList<Alumno> alumnitos = getAlumnos();
         try {
             PdfWriter.getInstance(doc, new FileOutputStream("output/"+nombreFinal+".pdf"));
             doc.open();
@@ -63,7 +64,7 @@ public class GeneradorReportePDF extends CambioDeMenu{
             doc.add(crearSubtitulo());
             doc.add(new Paragraph(" ")); doc.add(new Paragraph(" ")); //saltos de linea en el documento
 
-            doc.add(crearTabla(alumnitos));
+            doc.add(crearTabla(repositorioAlumnos.getAlumnos()));
             setAlert(Alert.AlertType.CONFIRMATION, "Reporte PDF creado con exito en: " + new File("output/"+nombreFinal+".pdf").getAbsolutePath());
         } catch (Exception e) {
             e.printStackTrace();

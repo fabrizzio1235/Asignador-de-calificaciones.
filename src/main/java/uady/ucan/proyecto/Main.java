@@ -6,7 +6,7 @@ import javafx.stage.Stage;
 import static uady.ucan.proyecto.ControladorVentanas.*;
 
 
-public class    Main extends Application {
+public class Main extends Application {
     ControladorVentanas cv = new ControladorVentanas();
 
     @Override

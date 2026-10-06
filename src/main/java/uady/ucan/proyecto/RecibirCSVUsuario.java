@@ -12,6 +12,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import static uady.ucan.proyecto.Alerta.setAlert;
+
 public class RecibirCSVUsuario extends CambioDeMenu {
     @FXML
     private TextField csvUsuario;
@@ -20,42 +22,35 @@ public class RecibirCSVUsuario extends CambioDeMenu {
     @FXML
     private Label rutaUsuario;
 
-    private ArrayList<Alumno> listaAlumnos;
-
     @FXML
     public void buscarCsvUsuario() {
         String archivoCalificaciones = "src/main/resources/" + csvUsuario.getText() + ".csv";
+
         try (BufferedReader br = new BufferedReader(new FileReader(archivoCalificaciones))) {
+            ArrayList<Alumno> nuevaListaAlumnos = new ArrayList<>();
             String linea;
             br.readLine();
             linea = br.readLine();
-            listaAlumnos = new ArrayList<>();
+
             while (linea != null) {
-
                 String[] renglon = linea.split(",");
-
                 if (renglon.length == 4) {
                     //Inline Method - Nuevo
-                    listaAlumnos.add(new Alumno(renglon[0], renglon[1], renglon[2], renglon[3]));
+                    nuevaListaAlumnos.add(new Alumno(renglon[0], renglon[1], renglon[2], renglon[3]));
                 }
                 linea = br.readLine();
             }
+            repositorioAlumnos.setAlumnos(nuevaListaAlumnos);
 
         } catch (IOException e) {
-            setAlumnos(null);
             mostrarCsvUsuario.setText("No seleccionado");
             mostrarCsvUsuario.setTextFill(Color.RED);
             setAlert(Alert.AlertType.WARNING, "Error al buscar archivo: "+ e.getMessage());
             return;
-
         }
-        setAlumnos(listaAlumnos);
+
         mostrarCsvUsuario.setText(csvUsuario.getText());
         mostrarCsvUsuario.setTextFill(Color.GREEN);
         rutaUsuario.setText(new File(archivoCalificaciones).getAbsolutePath());
     }
-
-
-
-
 }

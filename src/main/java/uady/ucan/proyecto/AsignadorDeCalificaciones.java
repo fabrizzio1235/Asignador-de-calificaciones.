@@ -12,6 +12,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import static uady.ucan.proyecto.Alerta.setAlert;
 
 
 public class AsignadorDeCalificaciones extends CambioDeMenu implements Initializable {
@@ -24,34 +25,37 @@ public class AsignadorDeCalificaciones extends CambioDeMenu implements Initializ
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        ArrayList<Alumno> listaPadre = getAlumnos();
+        ArrayList<Alumno> listaPadre = repositorioAlumnos.getAlumnos();
 
         if (listaPadre != null) {
             alumnos = FXCollections.observableArrayList(listaPadre);
             tablaAlumnos.setItems(alumnos);
         }
-        matricula.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getMatricula()));
-        alumno.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombreCompleto()));
-        calificacion.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getCalificacion())));
+
+        matricula.setCellValueFactory(cellData ->
+                new SimpleStringProperty(cellData.getValue().getMatricula()));
+        alumno.setCellValueFactory(cellData ->
+                new SimpleStringProperty(cellData.getValue().getNombreCompleto()));
+        calificacion.setCellValueFactory(cellData ->
+                new SimpleStringProperty(String.valueOf(cellData.getValue().getCalificacion())));
 
         tablaAlumnos.setEditable(true);
         calificacion.setCellFactory(TextFieldTableCell.forTableColumn());
+
         calificacion.setOnEditCommit(event -> {
             Alumno alumnoEditado = event.getRowValue();
 
             try {
                 int nuevaCal = Integer.parseInt(event.getNewValue()); //no recibe decimales
-                if (nuevaCal >= 0 && nuevaCal <= 100) {
+                try {
                     alumnoEditado.setCalificacion(nuevaCal);
-                } else {
-                    setAlert(Alert.AlertType.WARNING, "Calificación invalida --> 0<= calificacion <= 100");
-                    tablaAlumnos.refresh();
+                } catch (NumberFormatException e) {
+                    setAlert(Alert.AlertType.WARNING, "La calificación debe representar un número entre 0 y 100..");
                 }
             } catch (NumberFormatException e) {
-                setAlert(Alert.AlertType.WARNING, "Calificación invalida solo acepta enteros --> 0<= calificacion <= 100");
+                setAlert(Alert.AlertType.WARNING, "Favor de ingresar un número entero.");
                 tablaAlumnos.refresh();
             }
         });
     }
-
 }

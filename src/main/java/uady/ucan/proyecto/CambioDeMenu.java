@@ -6,6 +6,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
+import static uady.ucan.proyecto.Alerta.setAlert;
+
 
 public class CambioDeMenu extends ControladorVentanas {
     @FXML
@@ -14,6 +16,8 @@ public class CambioDeMenu extends ControladorVentanas {
     private TextField pdfNombre;
     @FXML
     private Button botonSalir;
+
+    protected RepositorioAlumnos repositorioAlumnos = new RepositorioAlumnos();
 
     @FXML
     public void asignarCalificacion () {
@@ -27,7 +31,7 @@ public class CambioDeMenu extends ControladorVentanas {
 
     @FXML
     public void generar () {
-        if(getAlumnos() == null){
+        if(repositorioAlumnos.getAlumnos() == null){
             setAlert(Alert.AlertType.WARNING, "Asegurarse de escoger el archivo CSV");
             return;
         }

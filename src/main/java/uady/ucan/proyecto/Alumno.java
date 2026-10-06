@@ -5,7 +5,7 @@ public class Alumno {
     private final String apellido1;
     private final String apellido2;
     private final String nombres;
-    private int calificacion = -1; //algún alumno que sacó 0, puede quedar como default y contar como calif ingresada
+    private int calificacion = -1; // 0 es un número válido.
 
     public Alumno(String matricula, String apellido1, String apellido2, String nombres) {
         this.matricula = matricula;
@@ -35,7 +35,11 @@ public class Alumno {
     }
 
     void setCalificacion(int calificacion) {
-        this.calificacion = calificacion;
+        if (calificacion >= 0 && calificacion <= 100) {
+            this.calificacion = calificacion;
+        } else {
+            throw new NumberFormatException();
+        }
     }
 
     public int getCalificacion() {

@@ -9,14 +9,18 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 
-public class GeneradorDeCSV  extends CambioDeMenu {
+import static uady.ucan.proyecto.Alerta.setAlert;
+
+public class GeneradorDeCSV extends CambioDeMenu {
+
+
     @FXML
     public void generarCsv(String csvNombre) {
         //Remove Assignments to Parameters - Nuevo
         String nombreFinal = (csvNombre == null || csvNombre.trim().isEmpty()) ? "Calificaciones" : csvNombre;
 
-        if(todosCalificados()) {
-            ArrayList<Alumno> alumnos = getAlumnos();
+        if(repositorioAlumnos.todosCalificados()) {
+            ArrayList<Alumno> alumnos = repositorioAlumnos.getAlumnos();
             alumnos.sort(Comparator.comparingInt(Alumno::getCalificacion));
             System.out.println("Escriba el nombre que desea para el archivo de salida:");
             String nombreArchivo = "output/"+ nombreFinal + ".csv";
@@ -33,16 +37,10 @@ public class GeneradorDeCSV  extends CambioDeMenu {
                setAlert(Alert.AlertType.ERROR, "Error: " + e.getMessage());
             }
         } else {
-            setAlert(Alert.AlertType.WARNING, "Quedan alumnos por calificar");
+            setAlert(Alert.AlertType.WARNING, "Quedan alumnos por calificar.");
         }
-    }
-    public boolean todosCalificados() {
-        if(getAlumnos() == null) {return false;}
-        for (Alumno a : getAlumnos()) {
-            if (a.getCalificacion() == -1) {
-                return false;
-            }
-        }
-        return true;
     }
 }
+// Construir una clase que se encargue de manejar al ArrayList
+// de los Alumnos, y que se comunique con todas las demás. Dicha
+// clase tendrá la función todosCalificados.

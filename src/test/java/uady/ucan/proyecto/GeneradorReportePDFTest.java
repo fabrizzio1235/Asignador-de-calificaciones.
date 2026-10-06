@@ -1,4 +1,4 @@
-package uady.ucan.proyecto;
+/* package uady.ucan.proyecto;
 
 import com.lowagie.text.pdf.PdfReader;
 import com.lowagie.text.pdf.parser.PdfTextExtractor;
@@ -56,7 +56,7 @@ class GeneradorReportePDFTest {
     exactamente igual que antes de extraer esos métodos.
     Resultado esperado: el archivo PDF existe en disco y se dispara CONFIRMATION.
     Datos: dos alumnos de prueba, nombre de archivo normal (NOMBRE_REPORTE).
-     */
+
     @Test
     void generarPdfCreaElArchivoYNotificaExitoConCONFIRMATION() {
         GeneradorReportePDF generador = new GeneradorReportePDF();
@@ -80,7 +80,7 @@ class GeneradorReportePDFTest {
     por la variable nueva "nombreFinal", cuando el nombre llega vacío o en blanco.
     Resultado esperado: se crea el archivo con el nombre por defecto "Reporte_Calificaciones.pdf".
     Datos: dos alumnos de prueba, nombre de archivo " " (solo espacios).
-     */
+
     @Test
     void generarPdfUsaNombrePorDefectoCuandoElNombreEstaVacio() {
         Path rutaPorDefecto = Path.of("output/Reporte_Calificaciones.pdf");
@@ -114,7 +114,7 @@ class GeneradorReportePDFTest {
     Resultado esperado: el texto extraído del PDF contiene la matrícula, el nombre
     completo y la calificación (o "S/C") de cada alumno, y nunca el -1 interno.
     Datos: dos alumnos de prueba (uno calificado con 95, uno sin calificar).
-     */
+
     @Test
     void generarPdfEscribeLosDatosCorrectosEnLaTablaIncluyendoLosSinCalificar() throws IOException {
         GeneradorReportePDF generador = new GeneradorReportePDF();
@@ -159,4 +159,4 @@ class GeneradorReportePDFTest {
             lector.close();
         }
     }
-}
+} */

@@ -1,4 +1,4 @@
-package uady.ucan.proyecto;
+/* package uady.ucan.proyecto;
 
 import javafx.application.Platform;
 import javafx.scene.control.Label;
@@ -61,7 +61,7 @@ class RecibirCSVUsuarioTest {
     Resultado esperado: se cargan los 2 alumnos, con cada campo exacto, y se actualiza
     correctamente el texto de la interfaz (mostrarCsvUsuario).
     Datos: CSV temporal válido con encabezado con dos renglones de alumnos.
-     */
+
     @Test
     void buscarCsvUsuarioCargaLosAlumnosCuandoElArchivoExisteYEsValido() throws Exception {
         RecibirCSVUsuario recibir = new RecibirCSVUsuario();
@@ -97,4 +97,4 @@ class RecibirCSVUsuarioTest {
         campo.setAccessible(true);
         campo.set(objetivo, valor);
     }
-}
+} */

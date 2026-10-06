@@ -1,46 +1,27 @@
 package uady.ucan.proyecto;
 
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
-import javafx.stage.Window;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-import java.util.ArrayList;
-import java.util.Scanner;
+
 import java.lang.StringBuilder;
 
-import static uady.ucan.proyecto.ControladorVentanas.setAlert;
+import static uady.ucan.proyecto.Alerta.setAlert;
 
 public class Login extends CambioDeMenu {
     @FXML private TextField usuarioEntrada;
     @FXML private PasswordField contraseñaEntrada;
     @FXML private Button botonLogin;
 
-    private ArrayList<Usuario> listaUsuarios = new ArrayList<>();
-
-    public void leerUsuarios() {
-        try (BufferedReader br = new BufferedReader(new FileReader("src/main/resources/users.csv"))) {
-            String linea = br.readLine();
-
-            while (linea != null) {
-                String[] dato = linea.split(",");
-                //Inline Method - Nuevo
-                listaUsuarios.add(new Usuario(dato[0], dato[1]));
-                linea = br.readLine();
-            }
-        } catch (IOException e) {
-            System.err.println("Error: " + e.getMessage());
-        }
-    }
+    private RepositorioUsuarios repositorioUsuarios = new RepositorioUsuarios();
 
     private static String bytesToHex(byte[] hash) {
         StringBuilder hexString = new StringBuilder(2 * hash.length);
@@ -60,21 +41,10 @@ public class Login extends CambioDeMenu {
         return bytesToHex(hashEncriptado);
     }
 
-    //Extract Method - Nuevo
-    private Usuario buscarUsuario(String nickname) {
-        for (Usuario u : listaUsuarios) {
-            if (u.getNickname().equals(nickname)) {
-                return u;
-            }
-        }
-        return null;
-    }
-
-    //Substitute Algorithm - Nuevo
     @FXML
     public void inicioSesion() throws NoSuchAlgorithmException { // 0: Entrar a la app, 1: Salir
-        leerUsuarios();
-        Usuario usuario = buscarUsuario(usuarioEntrada.getText());
+        repositorioUsuarios.leerUsuarios();
+        Usuario usuario = repositorioUsuarios.buscarUsuario(usuarioEntrada.getText());
 
         if (usuario == null) {
             setAlert(Alert.AlertType.WARNING, "Usuario incorrecto.");
