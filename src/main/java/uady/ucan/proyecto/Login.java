@@ -22,8 +22,8 @@ public class Login extends CambioDeMenu {
     @FXML private Button botonLogin;
 
     // Se instancian RepositorioUsuarios y Encriptador en Login porque solo él hace uso de las clases.
-    private RepositorioUsuarios repositorioUsuarios = new RepositorioUsuarios();
-    private Encriptador encriptador = new Encriptador();
+    protected RepositorioUsuarios repositorioUsuarios = new RepositorioUsuarios();
+    protected Encriptador encriptador = new Encriptador();
 
     @FXML
     public void inicioSesion() throws NoSuchAlgorithmException { // 0: Entrar a la app, 1: Salir

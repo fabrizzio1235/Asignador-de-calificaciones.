@@ -22,12 +22,14 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mockStatic;
+import static uady.ucan.proyecto.Alerta.setAlert;
 
 class RecibirCSVUsuarioTest {
 
     private static final String NOMBRE_CSV_PRUEBA = "csv_temporal_de_prueba";
     private Path rutaArchivoPrueba;
     private RecibirCSVUsuario recibir;
+    private RepositorioAlumnos alumnos;
     private TextField campoNombreCsv;
     private Label labelMostrar;
     private Label labelRuta;
@@ -55,7 +57,7 @@ class RecibirCSVUsuarioTest {
                 "A002,Canul,Chan,Maria"
         );
         Files.writeString(rutaArchivoPrueba, contenido);
-
+        alumnos = new RepositorioAlumnos();
         recibir = new RecibirCSVUsuario();
         campoNombreCsv = new TextField();
         labelMostrar = new Label();
@@ -72,7 +74,7 @@ class RecibirCSVUsuarioTest {
     @AfterEach
     void limpiarEstado() throws IOException {
         Files.deleteIfExists(rutaArchivoPrueba);
-        recibir.setAlumnos(null);
+        alumnos.setAlumnos(null);
     }
 
     /*
@@ -88,7 +90,7 @@ class RecibirCSVUsuarioTest {
 
         recibir.buscarCsvUsuario();
 
-        ArrayList<Alumno> alumnosCargados = recibir.getAlumnos();
+        ArrayList<Alumno> alumnosCargados = alumnos.getAlumnos();
         assertNotNull(alumnosCargados);
         assertEquals(2, alumnosCargados.size());
 
@@ -132,18 +134,17 @@ class RecibirCSVUsuarioTest {
     void buscarCsvFallidoActualizaFrontendConColorRojoYLanzaAlerta() {
         campoNombreCsv.setText("archivoNoExiste");
 
-        try (MockedStatic<ControladorVentanas> alertaSimulada = mockStatic(ControladorVentanas.class)) {
+        try (MockedStatic<Alerta> alertaSimulada = mockStatic(Alerta.class)) {
 
             recibir.buscarCsvUsuario();
 
-            assertNull(recibir.getAlumnos(), "La lista de alumnos global debe quedar nula en caso de error");
+            assertNull(alumnos.getAlumnos(), "La lista de alumnos global debe quedar nula en caso de error");
 
             assertEquals("No seleccionado", labelMostrar.getText(), "El label debe indicar que no hay selección");
             assertEquals(Color.RED, labelMostrar.getTextFill(), "El texto debe pintarse de rojo");
             assertEquals("", labelRuta.getText(), "La ruta no debe actualizarse");
 
-            alertaSimulada.verify(() ->
-                    ControladorVentanas.setAlert(eq(Alert.AlertType.WARNING), anyString())
+            alertaSimulada.verify(() -> setAlert(eq(Alert.AlertType.WARNING), anyString())
             );
         }
     }

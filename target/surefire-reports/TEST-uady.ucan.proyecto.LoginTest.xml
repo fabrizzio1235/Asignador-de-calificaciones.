@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="uady.ucan.proyecto.LoginTest" time="0.457" tests="4" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="uady.ucan.proyecto.LoginTest" time="1.073" tests="4" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="17"/>
     <property name="javafx.runtime.version" value="17.0.8+2"/>
@@ -15,7 +15,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="ES"/>
     <property name="sun.boot.library.path" value="/usr/lib/jvm/jdk-17.0.12-oracle-x64/lib"/>
-    <property name="sun.java.command" value="org.apache.maven.surefire.booter.ForkedBooter /home/fabri123/Documentos/ConstruccionSoftware/Asignador-de-calificaciones./target/surefire 2026-10-06T12-45-22_524-jvmRun1 surefire-20261006124522732_1tmp surefire_0-20261006124522732_2tmp"/>
+    <property name="sun.java.command" value="org.apache.maven.surefire.booter.ForkedBooter /home/fabri123/Documentos/ConstruccionSoftware/Asignador-de-calificaciones./target/surefire 2026-10-06T17-34-27_413-jvmRun1 surefire-20261006173427765_1tmp surefire_0-20261006173427765_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="/home/fabri123/Documentos/ConstruccionSoftware/Asignador-de-calificaciones./target/test-classes:/home/fabri123/.m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar:/home/fabri123/.m2/repository/org/openjfx/javafx-controls/17.0.8/javafx-controls-17.0.8.jar:/home/fabri123/.m2/repository/org/openjfx/javafx-graphics/17.0.8/javafx-graphics-17.0.8.jar:/home/fabri123/.m2/repository/org/openjfx/javafx-base/17.0.8/javafx-base-17.0.8.jar:/home/fabri123/.m2/repository/org/openjfx/javafx-fxml/17.0.8/javafx-fxml-17.0.8.jar:/home/fabri123/.m2/repository/org/junit/jupiter/junit-jupiter/5.10.2/junit-jupiter-5.10.2.jar:/home/fabri123/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar:/home/fabri123/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/home/fabri123/.m2/repository/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar:/home/fabri123/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/home/fabri123/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.10.2/junit-jupiter-params-5.10.2.jar:/home/fabri123/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar:/home/fabri123/.m2/repository/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar:/home/fabri123/.m2/repository/org/mockito/mockito-core/5.23.0/mockito-core-5.23.0.jar:/home/fabri123/.m2/repository/net/bytebuddy/byte-buddy/1.17.7/byte-buddy-1.17.7.jar:/home/fabri123/.m2/repository/net/bytebuddy/byte-buddy-agent/1.17.7/byte-buddy-agent-1.17.7.jar:/home/fabri123/.m2/repository/org/objenesis/objenesis/3.3/objenesis-3.3.jar:"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -55,8 +55,8 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="61.0"/>
   </properties>
-  <testcase name="inicioSesionEntraAlMenuYOcultaVentanaSiCredencialesSonCorrectas" classname="uady.ucan.proyecto.LoginTest" time="0.435"/>
-  <testcase name="leerUsuariosCargaUnUsuarioPorCadaLineaDelArchivoReal" classname="uady.ucan.proyecto.LoginTest" time="0.002"/>
-  <testcase name="inicioSesionMuestraAlertaSiUsuarioNoExiste" classname="uady.ucan.proyecto.LoginTest" time="0.006"/>
-  <testcase name="inicioSesionMuestraAlertaSiContrasenaEsIncorrecta" classname="uady.ucan.proyecto.LoginTest" time="0.009"/>
+  <testcase name="inicioSesionEntraAlMenuYOcultaVentanaSiCredencialesSonCorrectas" classname="uady.ucan.proyecto.LoginTest" time="1.02"/>
+  <testcase name="leerUsuariosCargaUnUsuarioPorCadaLineaDelArchivoReal" classname="uady.ucan.proyecto.LoginTest" time="0.004"/>
+  <testcase name="inicioSesionMuestraAlertaSiUsuarioNoExiste" classname="uady.ucan.proyecto.LoginTest" time="0.016"/>
+  <testcase name="inicioSesionMuestraAlertaSiContrasenaEsIncorrecta" classname="uady.ucan.proyecto.LoginTest" time="0.019"/>
 </testsuite>

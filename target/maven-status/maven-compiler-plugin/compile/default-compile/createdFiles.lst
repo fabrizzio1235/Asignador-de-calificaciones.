@@ -5,6 +5,7 @@ uady/ucan/proyecto/GeneradorDeCSV.class
 module-info.class
 uady/ucan/proyecto/RecibirCSVUsuario.class
 uady/ucan/proyecto/ControladorVentanas.class
+uady/ucan/proyecto/Encriptador.class
 uady/ucan/proyecto/CambioDeMenu.class
 uady/ucan/proyecto/GeneradorReportePDF.class
 uady/ucan/proyecto/Main.class

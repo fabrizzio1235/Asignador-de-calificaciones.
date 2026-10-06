@@ -16,19 +16,23 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mockStatic;
+import static uady.ucan.proyecto.Alerta.setAlert;
 
 class GeneradorDeCSVTest {
 
     private static final String NOMBRE_CSV_PRUEBA = "csv_temporal_de_prueba";
     private GeneradorDeCSV generador;
+    private RepositorioAlumnos alumnos;
 
     // Crea un GeneradorDeCSV limpio y asegura que exista la carpeta "output/"
     // antes de cada prueba, para que ninguna prueba dependa del estado que
     // haya dejado otra.
     @BeforeEach
     void limpiarEstadoCompartido() throws IOException {
+        alumnos = new RepositorioAlumnos();
         generador = new GeneradorDeCSV();
-        generador.setAlumnos(null);
+
+        alumnos.setAlumnos(null);
         Files.createDirectories(Path.of("output"));
     }
     // Borra los archivos CSV que la prueba haya generado y resetea la lista
@@ -38,7 +42,7 @@ class GeneradorDeCSVTest {
     void limpiarArchivosGenerados() throws IOException {
         Files.deleteIfExists(Path.of("output/" + NOMBRE_CSV_PRUEBA + ".csv"));
         Files.deleteIfExists(Path.of("output/Calificaciones.csv"));
-        generador.setAlumnos(null);
+        alumnos.setAlumnos(null);
     }
 
     /*
@@ -50,20 +54,19 @@ class GeneradorDeCSVTest {
     */
     @Test
     void generarCsvOrdenaPorCalificacionAscendenteYEscribeElArchivo() throws IOException {
-        ArrayList<Alumno> alumnos = new ArrayList<>();
+        ArrayList<Alumno> alumnosPrueba = new ArrayList<>();
         Alumno alto = new Alumno("A001", "Perez", "Lopez", "Juan");
         alto.setCalificacion(95);
         Alumno bajo = new Alumno("A002", "Canul", "Chan", "Maria");
         bajo.setCalificacion(60);
-        alumnos.add(alto);
-        alumnos.add(bajo);
-        generador.setAlumnos(alumnos);
+        alumnosPrueba.add(alto);
+        alumnosPrueba.add(bajo);
+        alumnos.setAlumnos(alumnosPrueba);
 
-        try (MockedStatic<ControladorVentanas> alertaSimulada = mockStatic(ControladorVentanas.class)) {
+        try (MockedStatic<Alerta> alertaSimulada = mockStatic(Alerta.class)) {
             generador.generarCsv(NOMBRE_CSV_PRUEBA);
 
-            alertaSimulada.verify(() ->
-                    ControladorVentanas.setAlert(eq(Alert.AlertType.CONFIRMATION), anyString())
+            alertaSimulada.verify(() -> setAlert(eq(Alert.AlertType.CONFIRMATION), anyString())
             );
         }
 
@@ -80,19 +83,18 @@ class GeneradorDeCSVTest {
     */
     @Test
     void generarCsvNoEscribeNadaSiQuedanAlumnosSinCalificar() {
-        ArrayList<Alumno> alumnos = new ArrayList<>();
+        ArrayList<Alumno> alumnosPrueba = new ArrayList<>();
         Alumno a1 = new Alumno("A001", "Perez", "Lopez", "Juan");
         a1.setCalificacion(90);
         Alumno sinCalificar = new Alumno("A002", "Canul", "Chan", "Maria");
-        alumnos.add(a1);
-        alumnos.add(sinCalificar);
-        generador.setAlumnos(alumnos);
+        alumnosPrueba.add(a1);
+        alumnosPrueba.add(sinCalificar);
+        alumnos.setAlumnos(alumnosPrueba);
 
-        try (MockedStatic<ControladorVentanas> alertaSimulada = mockStatic(ControladorVentanas.class)) {
+        try (MockedStatic<Alerta> alertaSimulada = mockStatic(Alerta.class)) {
             generador.generarCsv(NOMBRE_CSV_PRUEBA);
 
-            alertaSimulada.verify(() ->
-                    ControladorVentanas.setAlert(eq(Alert.AlertType.WARNING), anyString())
+            alertaSimulada.verify(() -> setAlert(eq(Alert.AlertType.WARNING), anyString())
             );
         }
 
@@ -107,17 +109,16 @@ class GeneradorDeCSVTest {
     */
     @Test
     void generarCsvUsaNombrePorDefectoCuandoElNombreEstaVacio() {
-        ArrayList<Alumno> alumnos = new ArrayList<>();
+        ArrayList<Alumno> alumnosPrueba = new ArrayList<>();
         Alumno a1 = new Alumno("A001", "Perez", "Lopez", "Juan");
         a1.setCalificacion(100);
-        alumnos.add(a1);
-        generador.setAlumnos(alumnos);
+        alumnosPrueba.add(a1);
+        alumnos.setAlumnos(alumnosPrueba);
 
-        try (MockedStatic<ControladorVentanas> alertaSimulada = mockStatic(ControladorVentanas.class)) {
+        try (MockedStatic<Alerta> alertaSimulada = mockStatic(Alerta.class)) {
             generador.generarCsv("   ");
 
-            alertaSimulada.verify(() ->
-                    ControladorVentanas.setAlert(eq(Alert.AlertType.CONFIRMATION), anyString())
+            alertaSimulada.verify(() -> setAlert(eq(Alert.AlertType.CONFIRMATION), anyString())
             );
         }
 

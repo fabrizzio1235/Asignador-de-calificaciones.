@@ -43,6 +43,7 @@ public class RecibirCSVUsuario extends CambioDeMenu {
             repositorioAlumnos.setAlumnos(nuevaListaAlumnos);
 
         } catch (IOException e) {
+            repositorioAlumnos.setAlumnos(null);
             mostrarCsvUsuario.setText("No seleccionado");
             mostrarCsvUsuario.setTextFill(Color.RED);
             setAlert(Alert.AlertType.WARNING, "Error al buscar archivo: "+ e.getMessage());

@@ -51,6 +51,8 @@ public class AsignadorDeCalificaciones extends CambioDeMenu implements Initializ
                     alumnoEditado.setCalificacion(nuevaCal);
                 } catch (NumberFormatException e) {
                     setAlert(Alert.AlertType.WARNING, "La calificación debe representar un número entre 0 y 100..");
+                    tablaAlumnos.refresh();
+
                 }
             } catch (NumberFormatException e) {
                 setAlert(Alert.AlertType.WARNING, "Favor de ingresar un número entero.");
