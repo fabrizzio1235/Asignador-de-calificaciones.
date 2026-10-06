@@ -1,4 +1,4 @@
-/*package uady.ucan.proyecto;
+package uady.ucan.proyecto;
 
 import javafx.scene.control.Alert;
 import org.junit.jupiter.api.AfterEach;
@@ -31,7 +31,6 @@ class GeneradorDeCSVTest {
         generador.setAlumnos(null);
         Files.createDirectories(Path.of("output"));
     }
-
     // Borra los archivos CSV que la prueba haya generado y resetea la lista
     // estática de alumnos, para que el sistema quede exactamente como estaba
     // antes de correr la prueba.
@@ -48,7 +47,7 @@ class GeneradorDeCSVTest {
     Resultado esperado: que el primer alumno ingresado en el csv sea el alumno Bajo, y también que el nombre generado sea el correcto
     Datos:    -Dos alumnos de manera correcta (uno con calif. alta y otro baja)
               -Se coloca el nombre del archivo NOMBRE_CSV_PRUEBA
-
+    */
     @Test
     void generarCsvOrdenaPorCalificacionAscendenteYEscribeElArchivo() throws IOException {
         ArrayList<Alumno> alumnos = new ArrayList<>();
@@ -78,7 +77,7 @@ class GeneradorDeCSVTest {
     Objetivo: Confirmar que si quedan alumnos sin calificar, NO se escribe ningún archivo, y avisa que faltan calificaciones.
     Resultado esperado: no se crea ningún archivo csv_temporal_de_prueba.csv, y se dispara WARNING.
     Datos: dos alumnos, uno calificado y otro sin calificar (-1).
-
+    */
     @Test
     void generarCsvNoEscribeNadaSiQuedanAlumnosSinCalificar() {
         ArrayList<Alumno> alumnos = new ArrayList<>();
@@ -105,7 +104,7 @@ class GeneradorDeCSVTest {
     Objetivo: Verificar específicamente cuando csvNombre es vacío ("csvNombre = 'Calificaciones'")
     Resultado esperado: se crea el archivo con el nombre por defecto "Calificaciones.csv".
     Datos: un alumno calificado, nombre de archivo " " (solo espacios).
-
+    */
     @Test
     void generarCsvUsaNombrePorDefectoCuandoElNombreEstaVacio() {
         ArrayList<Alumno> alumnos = new ArrayList<>();
@@ -124,4 +123,4 @@ class GeneradorDeCSVTest {
 
         assertTrue(Files.exists(Path.of("output/Calificaciones.csv")));
     }
-} */
+}
