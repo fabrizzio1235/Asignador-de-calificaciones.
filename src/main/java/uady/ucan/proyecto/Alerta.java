@@ -3,6 +3,8 @@ package uady.ucan.proyecto;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 
+// Ahora existe una clase que se encarga de la función que lanza un pop-up en la interfaz gráfica.
+
 public class Alerta {
     static Alert defaultAlert;
     static ButtonType acceptButton = new ButtonType("Aceptar");

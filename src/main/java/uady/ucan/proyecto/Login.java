@@ -21,25 +21,9 @@ public class Login extends CambioDeMenu {
     @FXML private PasswordField contraseñaEntrada;
     @FXML private Button botonLogin;
 
+    // Se instancian RepositorioUsuarios y Encriptador en Login porque solo él hace uso de las clases.
     private RepositorioUsuarios repositorioUsuarios = new RepositorioUsuarios();
-
-    private static String bytesToHex(byte[] hash) {
-        StringBuilder hexString = new StringBuilder(2 * hash.length);
-        for (int i = 0; i < hash.length; i++) {
-            String hex = Integer.toHexString(0xff & hash[i]);
-            if (hex.length() == 1) {
-                hexString.append('0');
-            }
-            hexString.append(hex);
-        }
-        return hexString.toString();
-    }
-
-    public String encriptarContraseña(String password) throws NoSuchAlgorithmException {
-        MessageDigest dg = MessageDigest.getInstance("SHA-256");
-        byte[] hashEncriptado = dg.digest(password.getBytes(StandardCharsets.UTF_8));
-        return bytesToHex(hashEncriptado);
-    }
+    private Encriptador encriptador = new Encriptador();
 
     @FXML
     public void inicioSesion() throws NoSuchAlgorithmException { // 0: Entrar a la app, 1: Salir
@@ -51,7 +35,8 @@ public class Login extends CambioDeMenu {
             return;
         }
 
-        boolean contraseñaCorrecta = usuario.getPassword().equals(encriptarContraseña(contraseñaEntrada.getText()));
+        boolean contraseñaCorrecta = usuario.getPassword().equals(
+                encriptador.encriptarContraseña(contraseñaEntrada.getText()));
         if (!contraseñaCorrecta) {
             setAlert(Alert.AlertType.WARNING, "Contraseña incorrecta.");
             return;

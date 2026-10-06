@@ -5,9 +5,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class RepositorioUsuarios {
-    private ArrayList<Alumno> listaAlumnos = null;
+// Ahora existe una clase que se encarga del manejo de los usuarios que pueden acceder a la aplicación.
 
+public class RepositorioUsuarios {
     private ArrayList<Usuario> listaUsuarios = new ArrayList<>();
 
     public void leerUsuarios() {

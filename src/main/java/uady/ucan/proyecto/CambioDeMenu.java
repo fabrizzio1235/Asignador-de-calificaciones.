@@ -17,6 +17,7 @@ public class CambioDeMenu extends ControladorVentanas {
     @FXML
     private Button botonSalir;
 
+    // Se instancia RepositorioAlumnos desde aquí para que todas las clases hijas tengan acceso a ella.
     protected RepositorioAlumnos repositorioAlumnos = new RepositorioAlumnos();
 
     @FXML

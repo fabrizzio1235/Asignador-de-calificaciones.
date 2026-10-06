@@ -35,7 +35,7 @@ public class Alumno {
     }
 
     void setCalificacion(int calificacion) {
-        if (calificacion >= 0 && calificacion <= 100) {
+        if (calificacion >= 0 && calificacion <= 100) { // El setter hace una validación.
             this.calificacion = calificacion;
         } else {
             throw new NumberFormatException();
